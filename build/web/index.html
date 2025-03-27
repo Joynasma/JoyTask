@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial - TaskJoy</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="validacoes.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>TaskJoy</h2>
+        <ul>
+            <li><a href="index.html">&#127968; Página Inicial</a></li>   
+            <li><a href="Metas.html">📝 Metas</a></li>
+            <li><a href="MinhasTarefas.html">📝 Minhas Tarefas</a></li>
+            <li><a href="Anexos.html">📎 Anexos</a></li>
+            <li><a href="Equipe.html">👥 Equipe</a></li>
+        </ul>
+    </div>
+
+    <div class="topbar">
+        <h1>Página Inicial</h1>
+        <h2>Data</h2>
+    </div>
+
+    <div class="content">
+        <h2>Projetos</h2>
+        <div class="project-header">
+            <input type="text" id="buscarProjeto" placeholder="Buscar Projeto..." onkeyup="filtrarProjetos()">
+            <button onclick="abrirCadastroProjeto()">Criar Projeto</button>
+        </div>
+
+        <div class="tabela-projetos">
+            <table id="tabelaProjetosIndex">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Entrega</th>
+                        <th>Equipe</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aqui os projetos serão carregados dinamicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            function abrirCadastroProjeto() {
+                window.location.href = "CadastroProjeto.html";
+            }
+
+            function carregarProjetos() {
+                let tabela = document.getElementById("tabelaProjetosIndex").getElementsByTagName("tbody")[0];
+                tabela.innerHTML = ""; // Limpa a tabela antes de recarregar os dados
+
+                let projetos = JSON.parse(localStorage.getItem("projetos")) || [];
+
+                projetos.forEach((projeto, index) => {
+                    let novaLinha = tabela.insertRow();
+
+                    let cell1 = novaLinha.insertCell(0);
+                    let cell2 = novaLinha.insertCell(1);
+                    let cell3 = novaLinha.insertCell(2);
+                    let cell4 = novaLinha.insertCell(3);
+                    let cell5 = novaLinha.insertCell(4);
+
+                    cell1.textContent = projeto.nomeProjeto;
+                    cell2.textContent = projeto.descricao;
+                    cell3.textContent = projeto.dataEntrega;
+                    cell4.textContent = "Equipe Padrão"; 
+
+                    // Botão de exclusão
+                    let btnExcluir = document.createElement("button");
+                    btnExcluir.textContent = "Excluir";
+                    btnExcluir.classList.add("btn-excluir");
+                    btnExcluir.onclick = function() {
+                        excluirProjeto(index);
+                    };
+
+                    // Botão de entrega (apenas para fins demonstrativos)
+                    let btnEntregar = document.createElement("button");
+                    btnEntregar.textContent = "Entregar";
+                    btnEntregar.classList.add("btn-entregar");
+
+                    cell5.appendChild(btnEntregar);
+                    cell5.appendChild(btnExcluir);
+                });
+            }
+
+            function excluirProjeto(index) {
+                let projetos = JSON.parse(localStorage.getItem("projetos")) || [];
+                projetos.splice(index, 1); // Remove o projeto pelo índice
+                localStorage.setItem("projetos", JSON.stringify(projetos)); // Atualiza o localStorage
+                carregarProjetos(); // Recarrega a tabela
+            }
+
+            function filtrarProjetos() {
+                let input = document.getElementById("buscarProjeto").value.toLowerCase();
+                let tabela = document.getElementById("tabelaProjetosIndex").getElementsByTagName("tbody")[0];
+                let linhas = tabela.getElementsByTagName("tr");
+
+                for (let i = 0; i < linhas.length; i++) {
+                    let colunaNome = linhas[i].getElementsByTagName("td")[0];
+                    if (colunaNome) {
+                        let texto = colunaNome.textContent || colunaNome.innerText;
+                        linhas[i].style.display = texto.toLowerCase().includes(input) ? "" : "none";
+                    }
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", carregarProjetos);
+        </script>
+
+    </div>
+</body>
+</html>

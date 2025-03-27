@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Tarefas - TaskJoy</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="validacoes.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>TaskJoy</h2>
+        <ul>
+            <li><a href="index.html">&#127968; Página Inicial</a></li>
+            <li><a href="Metas.html">📝 Metas</a></li>
+            <li><a href="MinhasTarefas.html">📝 Minhas Tarefas</a></li>
+            <li><a href="Anexos.html">📎 Anexos</a></li>
+            <li><a href="Equipe.html">👥 Equipe</a></li>
+        </ul>
+    </div>
+
+    <div class="topbar">
+        <h1>Minhas Tarefas</h1>
+        <h2>Data</h2>
+        <button class="btn-status">0 Tarefas Concluídas</button>
+        <button class="btn-status">0 Tarefas em Andamento</button>
+    </div>
+
+    <div class="content">
+        <h2>Lista</h2>
+        <div class="task-header">
+            <input type="text" placeholder="Buscar Tarefa...">
+            <button onclick="abrirAdicionarTarefa()">Adicionar Tarefa</button>
+        </div>
+
+        <script>
+            function abrirAdicionarTarefa() {
+                window.location.href = "AdicionarTarefa.html";
+            }
+        </script>
+
+        
+        <div class="tabela-tarefas">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome da Tarefa</th>
+                        <th>Descrição</th>
+                        <th>Data de Início</th>
+                        <th>Data Final</th>
+                        <th>Colaborador</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aqui as tarefas serão carregadas dinamicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="botoes">
+            <button class="btn-excluir">Excluir Tarefa</button>
+            <button class="btn-entregar">Entregar Tarefa</button>
+        </div>
+    </div>
+</body>
+</html>

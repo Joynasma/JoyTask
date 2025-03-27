@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipe - TaskJoy</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="validacoes.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>TaskJoy</h2>
+        <ul>
+            <li><a href="index.html">&#127968; Página Inicial</a></li>
+            <li><a href="metas.html">✅ Metas</a></li>
+            <li><a href="MinhasTarefas.html">📝 Minhas Tarefas</a></li>
+            <li><a href="Anexos.html">📎 Anexos</a></li>
+            <li><a href="equipe.html">👥 Equipe</a></li>
+        </ul>
+    </div>
+
+    <div class="topbar">
+        <h1>Equipe</h1>
+        <h2>Data</h2>
+    </div>
+
+    <div class="content">
+        <h2>Equipe</h2>
+        <div class="team-header">
+            <input type="text" placeholder="Buscar Equipe...">
+            <button onclick="abrirCadastrarEquipe()">Cadastrar Equipe</button>
+            <button onclick="abrirCadastrarColaborador()">Cadastrar Colaborador</button>
+
+        </div>
+
+        <script>
+            function abrirCadastrarEquipe() {
+                window.location.href = "CadastrarEquipe.html";
+            }
+        </script>
+        
+        <script>
+            function abrirCadastrarColaborador() {
+                window.location.href = "CadastrarColaborador.html";
+            }
+        </script>
+
+
+        
+        <div class="tabela-equipe">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipe</th>
+                        <th>Colaborador</th>
+                        <th>Email</th>
+                        <th>Nível</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aqui as equipes serão carregadas dinamicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="botoes">
+            <button class="btn-excluir">Excluir Equipe</button>
+        </div>
+    </div>
+</body>
+</html>

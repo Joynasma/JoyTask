@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Colaborador - TaskJoy</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="validacoes.js"></script>
+</head>
+<body>
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Cadastrar Colaborador</h2>
+            <form id="formCadastrarColaborador">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="cargo">Cargo:</label>
+                <input type="text" id="cargo" name="cargo" required>
+
+                <label for="nivel">Nível:</label>
+                <select id="nivel" name="nivel" required>
+                    <option value="">Escolha uma opção</option>
+                    <option value="Junior">Júnior</option>
+                    <option value="Pleno">Pleno</option>
+                    <option value="Sênior">Sênior</option>
+                </select>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+
+                <h3>Colaboradores</h3>
+                <table id="tabelaColaboradores">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Cargo</th>
+                            <th>Nível</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Os colaboradores serão inseridos aqui dinamicamente -->
+                    </tbody>
+                </table>
+
+                <button type="button" onclick="window.location.href='index.html'">Voltar</button>
+                <button type="submit" class="btn-cadastrar">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("formCadastrarColaborador").addEventListener("submit", function(event) {
+            event.preventDefault(); // Previne o reload da página
+            
+            // Obtém os valores dos campos do formulário
+            let nome = document.getElementById("nome").value;
+            let email = document.getElementById("email").value;
+            let cargo = document.getElementById("cargo").value;
+            let nivel = document.getElementById("nivel").value;
+
+            // Verifica se todos os campos foram preenchidos
+            if (nome === "" || email === "" || cargo === "" || nivel === "") {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            // Insere os dados na tabela
+            let tabela = document.getElementById("tabelaColaboradores").getElementsByTagName("tbody")[0];
+            let novaLinha = tabela.insertRow();
+            
+            let celulaNome = novaLinha.insertCell(0);
+            let celulaEmail = novaLinha.insertCell(1);
+            let celulaCargo = novaLinha.insertCell(2);
+            let celulaNivel = novaLinha.insertCell(3);
+
+            celulaNome.innerHTML = nome;
+            celulaEmail.innerHTML = email;
+            celulaCargo.innerHTML = cargo;
+            celulaNivel.innerHTML = nivel;
+
+            // Limpa os campos do formulário
+            document.getElementById("formCadastrarColaborador").reset();
+
+            // Exibe uma mensagem de sucesso
+            alert("Colaborador cadastrado com sucesso!");
+        });
+    </script>
+</body>
+</html>

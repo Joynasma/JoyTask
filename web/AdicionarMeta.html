@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Meta - TaskJoy</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <h1>Adicionar Meta</h1>
+    <form id="formAdicionarMeta">
+        <label for="nomeMeta">Meta:</label>
+        <input type="text" id="nomeMeta" name="nomeMeta" required>
+
+        <label for="dataFinal">Data Final:</label>
+        <input type="date" id="dataFinal" name="dataFinal" required>
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" required></textarea>
+
+        <button type="submit">Cadastrar</button>
+        <button type="button" onclick="window.location.href='Metas.html'">Voltar</button>
+    </form>
+
+    <h2>Metas Cadastradas</h2>
+    <table id="tabelaMetas">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Data Final</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dados serão carregados dinamicamente -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById("formAdicionarMeta").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            let nomeMeta = document.getElementById("nomeMeta").value;
+            let dataFinal = document.getElementById("dataFinal").value;
+            let descricao = document.getElementById("descricao").value;
+
+            if (nomeMeta === "" || dataFinal === "" || descricao === "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            let metas = JSON.parse(localStorage.getItem("metas")) || [];
+            metas.push({ nomeMeta, dataFinal, descricao });
+
+            localStorage.setItem("metas", JSON.stringify(metas));
+
+            alert("Meta adicionada com sucesso!");
+            carregarMetas();
+        });
+
+        function carregarMetas() {
+            let metas = JSON.parse(localStorage.getItem("metas")) || [];
+            let tabela = document.getElementById("tabelaMetas").getElementsByTagName("tbody")[0];
+            tabela.innerHTML = "";
+
+            metas.forEach(meta => {
+                let novaLinha = tabela.insertRow();
+                let cell1 = novaLinha.insertCell(0);
+                let cell2 = novaLinha.insertCell(1);
+                let cell3 = novaLinha.insertCell(2);
+
+                cell1.textContent = meta.nomeMeta;
+                cell2.textContent = meta.descricao;
+                cell3.textContent = meta.dataFinal;
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", carregarMetas);
+    </script>
+</body>
+</html>

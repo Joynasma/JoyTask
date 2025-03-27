@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Equipe - TaskJoy</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="validacoes.js"></script>
+</head>
+<body>
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Cadastrar Equipe</h2>
+            <form id="formCadastrarEquipe">
+                <label for="nomeEquipe">Nome da Equipe:</label>
+                <input type="text" id="nomeEquipe" name="nomeEquipe" required>
+
+                <h3>Colaboradores</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Cargo</th>
+                            <th>Nível</th>
+                            <th>Adicionar à Equipe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Colaboradores serão carregados dinamicamente -->
+                    </tbody>
+                </table>
+
+                <input type="text" placeholder="Pesquisar" id="pesquisarColaborador">
+                <button type="submit" class="btn-cadastrar">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
